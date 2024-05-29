@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#define up(i,a,b) for (int i = (int)a; i <= (int)b; i++)
+#define down(i,a,b) for (int i = (int)a; i >= (int)b; i--)
+#define pii pair<int, int>
+#define f first
+#define s second
+#define MP make_pair
+#define ep emplace_back
+#define all(x) x.begin(), x.end()
+#define bit(x,i) ((x >> i) & 1)
+#define MAX_ARR_SIZE 486010000
+#define Task "A"
+using namespace std;
+const int MOD = 1e9 + 7;
+#define N 100005
+int n, a[N], F[N];
+int m=0, b[N];
+
+int main()
+{
+    cin >>n;
+    for(int i = 1; i<= n;i++)
+    {
+      cin >>a[i];
+    }
+    for (int i = 1; i <= n; i++) {
+        F[i] = lower_bound(b + 1, b + m + 1, a[i]) - b;
+        m = max(m, F[i]);
+        b[F[i]] = a[i];
+    }
+    cout<<m<<"\n";
+    int Expected = m;
+    vector<int> T;
+    for (int i = n; i >= 1; i--) {
+        if (F[i] == Expected) {
+            T.push_back(a[i]);
+            Expected--;
+        }
+    }
+    for (int i = T.size() - 1; i >= 0; i--)
+        cout<< T[i] <<" ";
+}
